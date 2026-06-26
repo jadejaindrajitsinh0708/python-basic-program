@@ -39,6 +39,9 @@ def student(marks):
     else :
         print(" FAILL")
 
+
+
+
 student(marks)
 
 english = float(input("enter your english marks: "))
@@ -60,3 +63,31 @@ if english >= 33 and gujrati >= 33 and economics >= 33 and accountancy >=33 and 
     print("you are passs")
 else :
     print("faill")
+
+
+
+
+number = int(input("enter any number"))
+
+def num(number):
+ if number > 1 :
+
+    for i in range(2,number) :
+        if number   %i == 0  :
+            print("number is not prime")
+            break
+    else :
+        print("number is prime")
+ else :
+    print("number is not prime")
+
+num(number)
+
+
+
+
+
+
+
+
+
