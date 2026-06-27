@@ -87,6 +87,67 @@ num(number)
 
 
 
+balance = 10000.0
+correct_pin = 1234
+
+
+while True:
+    print("\n--- ATM MENU ---")
+    print("1. Withdraw Money ")
+    print("2. Check Balance ")
+    print("3. Exit ")
+    
+    choice = input("Select an option (1-3): ")
+    
+    if choice == "1":
+        pay = float(input("Enter amount to withdraw: "))
+        pin = int(input("Enter your PIN: "))
+        
+        if pin == correct_pin:
+            if pay <= balance:
+                balance = balance - pay  
+                print("✅ Transaction successful!")
+                print(f"Your new balance is: {balance}")
+            else:
+                print("❌ Transaction failed: Insufficient balance!")
+        else:
+            print("❌ Transaction failed: Incorrect PIN!")
+            
+    elif choice == "2":
+        print(f"💰 Your current balance is: {balance}")
+        
+    elif choice == "3":
+        print("Thank you for using our service. Goodbye!")
+        break  
+        
+    else:
+        print("Invalid choice! Please select 1, 2, or 3.")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
