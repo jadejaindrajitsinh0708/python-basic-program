@@ -42,37 +42,37 @@
 
 
 
-# # student(marks)
+# student(marks)
 
-# english = float(input("enter your english marks: "))
-# gujrati = float(input("enter your gujrati marks: "))
-# match = float(input("enter your matha marks"))
-# scince = float(input("enter your scince marks"))
-# hindi = float(input("enter your hindi marks"))
-# social= float(input("enter your social marks"))
+english = float(input("enter your english marks: "))
+gujrati = float(input("enter your gujrati marks: "))
+match = float(input("enter your matha marks"))
+scince = float(input("enter your scince marks"))
+hindi = float(input("enter your hindi marks"))
+social= float(input("enter your social marks"))
 
-# economics = float(input("enter your economics marks: "))
-# accountancy = float(input("enter your accountancy marks: "))
-# statistics = float(input("enter your statistics marks: "))
-# spcc = float(input("enter your spcc marks: "))
-# business_studies = float(input("enter your business studies marks: "))
-
-
-# total_marks = english + gujrati + match+ scince + hindi + social
-# percentage = (total_marks / 600) * 100
-
-# print(f" (Total Marks): {total_marks}")
-# print(f" (Percentage): {percentage:.2f}%") 
-
-# if english >= 26 and gujrati >= 26 and match >=26 and scince >=26 and hindi >=26 and social >=26 :
-#     print("you are passs")
-# else :
-#     print("faill")
+economics = float(input("enter your economics marks: "))
+accountancy = float(input("enter your accountancy marks: "))
+statistics = float(input("enter your statistics marks: "))
+spcc = float(input("enter your spcc marks: "))
+business_studies = float(input("enter your business studies marks: "))
 
 
+total_marks = english + gujrati + match+ scince + hindi + social
+percentage = (total_marks / 600) * 100
+
+print(f" (Total Marks): {total_marks}")
+print(f" (Percentage): {percentage:.2f}%") 
+
+if english >= 26 and gujrati >= 26 and match >=26 and scince >=26 and hindi >=26 and social >=26 :
+    print("you are passs")
+else :
+    print("faill")
 
 
-# number = int(input("enter any number"))
+
+
+number = int(input("enter any number"))
 
 # def num(number):
 #  if number > 1 :
@@ -177,41 +177,41 @@
 #     print("game over")
 
 
-my_list = [10,20,30,40,50,60]
-def add_num(my_list):
+# my_list = [10,20,30,40,50,60]
+# def add_num(my_list):
     
-    num = int(input("enter any number :--"))
-    my_list.append(num)
-    print(my_list)
+#     num = int(input("enter any number :--"))
+#     my_list.append(num)
+#     print(my_list)
 
 
-    # add_num(my_list)
-def remove_num(my_list):
+#     # add_num(my_list)
+# def remove_num(my_list):
   
- num = int(input("enter any number "))
-if num == my_list :
-        print("pass")
-my_list.remove(num)
+#  num = int(input("enter any number "))
+# if num == my_list :
+#         print("pass")
+# my_list.remove(num)
 
-print(my_list)
-    # remove_num(my_list)
-while True:
-    print("option 1. number add in this list :>>")
-    print("option 2. remove number in this lost :>>")
-    print("option 3. Exit you >...")
-    if num :=input("enter your choose number :>>"):
-        if num  =="1" :
-            add_num(my_list)
+# print(my_list)
+#     # remove_num(my_list)
+# while True:
+#     print("option 1. number add in this list :>>")
+#     print("option 2. remove number in this lost :>>")
+#     print("option 3. Exit you >...")
+#     if num :=input("enter your choose number :>>"):
+#         if num  =="1" :
+#             add_num(my_list)
 
-        elif num == "2":
-            remove_num(my_list)
+#         elif num == "2":
+#             remove_num(my_list)
 
-        elif num =="3" :
-            print("you EXIT .....")
-            break
+#         elif num =="3" :
+#             print("you EXIT .....")
+#             break
 
-        else : 
-            print("invalid this number" )
+#         else : 
+#             print("invalid this number" )
     # else:
     #     print("number is not difind")
 
