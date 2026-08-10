@@ -2,244 +2,415 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-print("="* 50)
-print("Welcome To The Bank Management System")
-print("="*50)
+
+# Customer Class
 
 
 class Customer:
 
     def __init__(self, acc_no, name, mobile, acc_type, balance):
-        self.acc_no = acc_no
-        self.name = name
-        self.mobile = mobile
-        self.acc_type = acc_type
-        self.balance = balance
 
+        self.__acc_no = acc_no
+        self.__name = name
+        self.__mobile = mobile
+        self.__acc_type = acc_type
+        self.__opening_balance = balance
+        self.__balance = balance
 
+    # Display customer information
     def display(self):
-        print("--------------------")
-        print("Account No :", self.acc_no)
-        print("Name       :", self.name)
-        print("Mobile     :", self.mobile)
-        print("Type       :", self.acc_type)
-        print("Balance    :", self.balance)
+    
+  
+        print("Account Number :", self.__acc_no)
+        print("Customer Name  :", self.__name)
+        print("Mobile Number  :", self.__mobile)
+        print("Account Type   :", self.__acc_type)
+        print("Opening Balance:", self.__opening_balance)
+        print("Current Balance:", self.__balance)
 
+
+    # Deposit money
+    def deposit(self, amount):
+
+        if amount > 0:
+            self.__balance = self.__balance + amount
+            print("Amount deposited successfully.")
+            print("New Balance :", self.__balance)
+        else:
+            print("Amount must be greater than 0.")
+
+    # Withdraw money
+    def withdraw(self, amount):
+
+        if amount <= 0:
+            print("Amount must be greater than 0.")
+
+        elif amount > self.__balance:
+            print("Insufficient balance.")
+
+        else:
+            self.__balance = self.__balance - amount
+            print("Amount withdrawn successfully.")
+            print("New Balance :", self.__balance)
+
+    # Update customer information
+    def update(self, name, mobile, acc_type):
+
+        self.__name = name
+        self.__mobile = mobile
+        self.__acc_type = acc_type
+
+        print("Customer information updated successfully.")
+
+    # Get account number
+    def get_account_number(self):
+
+        return self.__acc_no
+
+    # Get current balance
+    def get_balance(self):
+
+        return self.__balance
+
+
+
+# Bank Class
 
 
 class Bank:
 
     def __init__(self):
-        self.accounts = []
 
+        self.customers = []
 
+    # Create Account
+    def create_account(self):
 
-    def add_account(self, customer):
-        self.accounts.append(customer)
-        print("Account Created Successfully")
+        try:
 
+            acc_no = int(input("Enter Account Number: "))
 
-    def show_all(self):
+            # Check duplicate account number
+            for customer in self.customers:
 
-        for c in self.accounts:
-            c.display()
+                if customer.get_account_number() == acc_no:
+                    print("Account number already exists.")
+                    return
 
+            name = input("Enter Customer Name: ")
 
+            mobile = input("Enter Mobile Number: ")
 
-    def search(self, acc_no):
+            if len(mobile) != 10:
+                print("Mobile number must contain 10 digits.")
+                return
 
-        for c in self.accounts:
-            if c.acc_no == acc_no:
-                return c
+            print("\nSelect Account Type")
+            print("1. Savings")
+            print("2. Current")
 
-        return None
+            choice = input("Enter choice: ")
 
+            if choice == "1":
+                acc_type = "Savings"
 
-
-    def update(self):
-
-        acc = int(input("Enter Account Number: "))
-
-        customer = self.search(acc)
-
-        if customer:
-
-            customer.name = input("Enter New Name: ")
-
-            print("Updated Successfully")
-
-        else:
-            print("Account Not Found")
-
-
-    def delete(self):
-
-        acc = int(input("Enter Account Number: "))
-
-        customer = self.search(acc)
-
-        if customer:
-
-            self.accounts.remove(customer)
-
-            print("Deleted Successfully")
-
-        else:
-            print("Account Not Found")
-
-
-    def deposit(self):
-
-        acc = int(input("Account Number: "))
-
-        customer = self.search(acc)
-
-        if customer:
-
-            amount = int(input("Amount: "))
-
-            customer.balance += amount
-
-            print("Deposit Successful")
-
-
-    
-    def withdraw(self):
-
-        acc = int(input("Account Number: "))
-
-        customer = self.search(acc)
-
-        if customer:
-
-            amount = int(input("Amount: "))
-
-            if amount <= customer.balance:
-
-                customer.balance -= amount
-
-                print("Withdraw Successful")
+            elif choice == "2":
+                acc_type = "Current"
 
             else:
-                print("Insufficient Balance")
+                print("Invalid account type.")
+                return
 
+            balance = float(input("Enter Opening Balance: "))
 
+            if balance < 0:
+                print("Balance cannot be negative.")
+                return
 
-    def report(self):
+            customer = Customer(
+                acc_no,
+                name,
+                mobile,
+                acc_type,
+                balance
+            )
 
-        names = []
+            self.customers.append(customer)
+
+            print("\nAccount created successfully.")
+
+        except ValueError:
+
+            print("Please enter valid numeric values.")
+
+    # Read / Display All Accounts
+    def display_all_accounts(self):
+
+        if len(self.customers) == 0:
+
+            print("No accounts found.")
+
+        else:
+
+            for customer in self.customers:
+
+                customer.display()
+
+    # Search Account
+    def search_account(self):
+
+        try:
+
+            acc_no = int(input("Enter Account Number: "))
+
+            for customer in self.customers:
+
+                if customer.get_account_number() == acc_no:
+
+                    customer.display()
+                    return
+
+            print("Account not found.")
+
+        except ValueError:
+
+            print("Invalid account number.")
+
+    # Update Account
+    def update_account(self):
+
+        try:
+
+            acc_no = int(input("Enter Account Number: "))
+
+            for customer in self.customers:
+
+                if customer.get_account_number() == acc_no:
+
+                    name = input("Enter New Name: ")
+                    mobile = input("Enter New Mobile Number: ")
+
+                    if len(mobile) != 10:
+                        print("Mobile number must contain 10 digits.")
+                        return
+
+                    print("1. Savings")
+                    print("2. Current")
+
+                    choice = input("Enter Account Type: ")
+
+                    if choice == "1":
+                        acc_type = "Savings"
+
+                    elif choice == "2":
+                        acc_type = "Current"
+
+                    else:
+                        print("Invalid account type.")
+                        return
+
+                    customer.update(name, mobile, acc_type)
+
+                    return
+
+            print("Account not found.")
+
+        except ValueError:
+
+            print("Invalid input.")
+
+    # Delete Account
+    def delete_account(self):
+
+        try:
+
+            acc_no = int(input("Enter Account Number: "))
+
+            for customer in self.customers:
+
+                if customer.get_account_number() == acc_no:
+
+                    self.customers.remove(customer)
+
+                    print("Account deleted successfully.")
+
+                    return
+
+            print("Account not found.")
+
+        except ValueError:
+
+            print("Invalid account number.")
+
+    # Deposit
+    def deposit_money(self):
+
+        try:
+
+            acc_no = int(input("Enter Account Number: "))
+
+            for customer in self.customers:
+
+                if customer.get_account_number() == acc_no:
+
+                    amount = float(input("Enter Deposit Amount: "))
+
+                    customer.deposit(amount)
+
+                    return
+
+            print("Account not found.")
+
+        except ValueError:
+
+            print("Please enter a valid amount.")
+
+    # Withdraw
+    def withdraw_money(self):
+
+        try:
+
+            acc_no = int(input("Enter Account Number: "))
+
+            for customer in self.customers:
+
+                if customer.get_account_number() == acc_no:
+
+                    amount = float(input("Enter Withdraw Amount: "))
+
+                    customer.withdraw(amount)
+
+                    return
+
+            print("Account not found.")
+
+        except ValueError:
+
+            print("Please enter a valid amount.")
+
+    # Balance Analysis using NumPy
+    def balance_analysis(self):
+
+        if len(self.customers) == 0:
+
+            print("No accounts available.")
+
+            return
+
         balances = []
 
+        for customer in self.customers:
 
-        for c in self.accounts:
+            balances.append(customer.get_balance())
 
-            names.append(c.name)
-            balances.append(c.balance)
+        balance_array = np.array(balances)
 
+        print("\n========== Balance Analysis ==========")
 
-        data = np.array(balances)
+        print("Total Balance :", np.sum(balance_array))
 
-        print("Total Balance :", np.sum(data))
-        print("Average Balance :", np.mean(data))
+        print("Average Balance :", np.mean(balance_array))
 
+        print("Maximum Balance :", np.max(balance_array))
 
-        plt.bar(names, balances)
+        print("Minimum Balance :", np.min(balance_array))
 
-        plt.xlabel("Customer")
-        plt.ylabel("Balance")
+    # Graphical Report using Matplotlib
+    def graphical_report(self):
 
-        plt.title("Bank Balance Report")
+        if len(self.customers) == 0:
+
+            print("No accounts available.")
+
+            return
+
+        account_numbers = []
+        balances = []
+
+        for customer in self.customers:
+
+            account_numbers.append(customer.get_account_number())
+            balances.append(customer.get_balance())
+
+        plt.bar(account_numbers, balances)
+
+        plt.xlabel("Account Number")
+        plt.ylabel("Current Balance")
+        plt.title("Bank Account Balance Report")
 
         plt.show()
 
 
-
-
+# ==========================================
+# Main Program
+# ==========================================
 
 bank = Bank()
 
 
-
-
-bank.add_account(Customer(101,"Rahul","9876543210","Saving",25000))
-
-bank.add_account(Customer(102,"Amit","9988776655","Current",40000))
-
-bank.add_account(Customer(103,"Priya","9876501234","Saving",35000))
-
-bank.add_account(Customer(104,"Neha","9123456789","Saving",18000))
-
-bank.add_account(Customer(105,"Karan","9012345678","Current",50000))
-
-
-
 while True:
 
-    print("""
-1. Create Account
-2. View All Account
-3. Update Account
-4. Delete Account
-5. Deposit
-6. Withdraw
-7. Report Graph
-8. Exit
-""")
+    print("\n")
+    print("=" * 60)
+    print("             BANK MANAGEMENT SYSTEM")
+    print("=" * 60)
 
+    print("1. Create Account")
+    print("2. View All Accounts")
+    print("3. Search Account")
+    print("4. Update Account")
+    print("5. Delete Account")
+    print("6. Deposit Money")
+    print("7. Withdraw Money")
+    print("8. Balance Analysis")
+    print("9. Graphical Report")
+    print("10. Exit")
 
-    choice = input("Enter Choice: ")
+    print("=" * 60)
 
+    choice = input("Enter your choice: ")
 
     if choice == "1":
 
-        acc = int(input("Account No: "))
-        name = input("Name: ")
-        mobile = input("Mobile: ")
-        typ = input("Type: ")
-        bal = int(input("Balance: "))
-
-        bank.add_account(
-            Customer(acc,name,mobile,typ,bal)
-        )
-
+        bank.create_account()
 
     elif choice == "2":
 
-        bank.show_all()
-
+        bank.display_all_accounts()
 
     elif choice == "3":
 
-        bank.update()
-
+        bank.search_account()
 
     elif choice == "4":
 
-        bank.delete()
-
+        bank.update_account()
 
     elif choice == "5":
 
-        bank.deposit()
-
+        bank.delete_account()
 
     elif choice == "6":
 
-        bank.withdraw()
-
+        bank.deposit_money()
 
     elif choice == "7":
 
-        bank.report()
-
+        bank.withdraw_money()
 
     elif choice == "8":
 
-        print("Thank You")
+        bank.balance_analysis()
 
+    elif choice == "9":
+
+        bank.graphical_report()
+
+    elif choice == "10":
+
+        print("Thank you for using Bank Management System.")
         break
-
 
     else:
 
-        print("Invalid Choice")
+        print("Invalid choice. Please try again.")
