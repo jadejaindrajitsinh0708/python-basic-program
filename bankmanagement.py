@@ -351,9 +351,9 @@ bank = Bank()
 while True:
 
     print("\n")
-    print("=" * 60)
+    print("-" * 60)
     print("             BANK MANAGEMENT SYSTEM")
-    print("=" * 60)
+    print("-" * 60)
 
     print("1. Create Account")
     print("2. View All Accounts")
@@ -366,7 +366,7 @@ while True:
     print("9. Graphical Report")
     print("10. Exit")
 
-    print("=" * 60)
+    print("+" * 60)
 
     choice = input("Enter your choice: ")
 
