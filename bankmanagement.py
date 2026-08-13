@@ -2,10 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
-# Customer Class
-
-
 class Customer:
 
     def __init__(self, acc_no, name, mobile, acc_type, balance):
@@ -341,9 +337,7 @@ class Bank:
         plt.show()
 
 
-# ==========================================
-# Main Program
-# ==========================================
+
 
 bank = Bank()
 
